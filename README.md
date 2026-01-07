@@ -1,15 +1,17 @@
 # Claude Flow
 
-An interactive flowchart canvas for Claude Code. Design systems and workflows visually, with real-time commenting and iteration.
+An interactive flowchart canvas for Claude Code. Design systems and workflows visually, with real-time commenting and collaboration.
 
 ![Demo](media/demo.gif)
 
 ## What It Does
 
-- Spawns flowchart diagrams in a tmux split pane
+- Spawns flowchart diagrams in a split pane (iTerm2 or tmux)
+- Tree view with full DAG support (branches that rejoin show as references)
 - Navigate nodes with arrow keys
-- Add comments on specific nodes (press `c`)
-- Claude receives comments and can update the diagram
+- Add comments on any node - including reference nodes for context-specific feedback
+- Tab between Flow and Comments views
+- Claude receives comments with full path context and can update the diagram
 - Iterate until your design is complete
 
 ## Installation
@@ -17,8 +19,7 @@ An interactive flowchart canvas for Claude Code. Design systems and workflows vi
 ### Prerequisites
 
 1. **Bun** - Install with `brew install bun`
-2. **tmux** - Install with `brew install tmux`
-3. Run Claude Code inside a tmux session
+2. **iTerm2** (recommended) or **tmux** - The canvas spawns in a split pane
 
 ### Install the Plugin
 
@@ -33,7 +34,7 @@ An interactive flowchart canvas for Claude Code. Design systems and workflows vi
 ### Verify Installation
 
 ```bash
-# Inside tmux, ask Claude to create a flowchart
+# Ask Claude to create a flowchart
 "Create a flowchart for a simple data pipeline: webhook → transform → database"
 ```
 
@@ -51,29 +52,42 @@ An interactive flowchart canvas for Claude Code. Design systems and workflows vi
 
 | Key | Action |
 |-----|--------|
-| ← / → | Navigate between nodes |
-| c | Add/edit comment on selected node |
-| Enter | Save comment |
-| Esc | Cancel or close |
+| ↑ / ↓ | Navigate between nodes |
+| Enter | Add/edit comment on selected node |
+| Tab | Switch between Flow and Comments views |
+| Esc | Cancel comment input |
 | q | Quit canvas |
 
 ### Iterate
 
-Add comments on nodes, and Claude will see them. Ask Claude to update the diagram based on your feedback.
+Add comments on nodes, and Claude will see them with full path context (e.g., `Webhook → Switch → Email opened → Disqualified`). Ask Claude to update the diagram based on your feedback.
 
 ## Example
 
 ```
-┌───────────┐    ┌───────────┐    ┌───────────┐
-│  Webhook  │───▶│ Transform │───▶│  Output   │
-└───────────┘    └───────────┘    └───────────┘
-                      [*]
-┌─ Comment ─────────────────────────────────────┐
-│ Need error handling for invalid payloads      │
-└───────────────────────────────────────────────┘
+▸ Flow    Comments (2)
 
-←/→ navigate | c comment | q quit
+New Lead Automation
+
+Webhook
+↓
+└─ Switch
+   ├─ New lead
+   │   ↓
+   │   └─ Lead info
+   │       ├─ Create record *
+   │       └─ Disqualified
+   ├─ Email opened
+   │   ├─ → Create record
+   │   └─ → Disqualified *
+   └─ Meeting booked
+       ↓
+       └─ Lookup company
+
+↑/↓ navigate | Enter comment | Tab switch | q quit
 ```
+
+Nodes marked with `*` have comments. References (→) can have their own comments based on their location in the flow.
 
 ## Configuration
 
@@ -110,8 +124,7 @@ bun run src/cli.ts show flowchart --config '{"nodes":[{"id":"1","label":"Test"}]
 
 ## Requirements
 
-- macOS or Linux
-- tmux (for canvas spawning)
+- macOS (iTerm2 recommended) or Linux (tmux)
 - Bun runtime
 - Claude Code
 
