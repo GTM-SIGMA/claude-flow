@@ -81,10 +81,10 @@ bun run src/cli.ts spawn flowchart \
 
 | Key | Action |
 |-----|--------|
-| ← / → | Navigate between nodes |
-| c | Add/edit comment on selected node |
-| Enter | Save comment |
-| Esc | Cancel comment / close canvas |
+| ↑ / ↓ | Navigate between nodes |
+| Enter | Add/edit comment on selected node |
+| Tab | Switch between Flow and Comments views |
+| Esc | Cancel comment input |
 | q | Quit canvas |
 
 ## IPC Messages
@@ -118,13 +118,17 @@ bun run src/cli.ts spawn flowchart \
 **Claude:** I'll create a flowchart to visualize this. *spawns canvas*
 
 ```
-┌───────────┐    ┌───────────┐    ┌───────────┐
-│  Trigger  │───▶│  Fetch    │───▶│  Compare  │
-└───────────┘    └───────────┘    └───────────┘
+▸ Flow    Comments
+
+Trigger
+↓
+└─ Fetch
+   ↓
+   └─ Compare
 ```
 
-Navigate with arrow keys, press `c` to comment on any node.
+Navigate with ↑/↓, press Enter to comment on any node.
 
-**User:** *selects "Compare" node, presses `c`, types "Need to handle deleted records"*
+**User:** *selects "Compare" node, presses Enter, types "Need to handle deleted records"*
 
 **Claude:** Good point. I see your comment on Compare about handling deleted records. Should I add a "Handle Deletes" step after Compare, or should that be part of the Compare logic?
