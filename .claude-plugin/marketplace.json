@@ -1,7 +1,12 @@
 {
   "name": "claude-flow",
-  "owner": "GTM Sigma",
-  "description": "Claude Code plugin for interactive flowchart design",
+  "owner": {
+    "name": "GTM Sigma",
+    "email": "hello@gtmsigma.com"
+  },
+  "metadata": {
+    "description": "Claude Code plugin for interactive flowchart design"
+  },
   "plugins": [
     {
       "name": "flow",
