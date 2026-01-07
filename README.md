@@ -29,6 +29,10 @@ An interactive flowchart canvas for Claude Code. Design systems and workflows vi
 
 # Install the plugin
 /plugin install flow@claude-flow
+
+# Install dependencies (required once after install)
+cd ~/.claude/plugins/cache/claude-flow/flow/*/
+bun install
 ```
 
 ### Verify Installation
