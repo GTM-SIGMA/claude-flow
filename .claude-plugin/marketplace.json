@@ -1,0 +1,14 @@
+{
+  "name": "claude-flow",
+  "owner": "GTM Sigma",
+  "description": "Claude Code plugin for interactive flowchart design",
+  "plugins": [
+    {
+      "name": "flow",
+      "source": "./flow",
+      "description": "Spawn interactive flowchart canvases for system design and workflow planning",
+      "version": "0.1.0",
+      "strict": false
+    }
+  ]
+}
