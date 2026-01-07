@@ -35,10 +35,10 @@ The `/flow` command creates an interactive flowchart visualization in a tmux spl
 
 ## User Controls
 
-- **←/→** - Navigate between nodes
-- **c** - Comment on selected node
-- **Enter** - Save comment
-- **Esc** - Cancel/close
+- **↑/↓** - Navigate between nodes
+- **Enter** - Add/edit comment on selected node
+- **Tab** - Switch between Flow and Comments views
+- **Esc** - Cancel comment input
 - **q** - Quit
 
 ## Tips
